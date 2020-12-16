@@ -6,9 +6,16 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   var d = new Date();
   var day = d.getDay();
-  var days = [1,2,3,4,5]
-  var acces = days.includes(day)
-  console.log(acces)
-  acces ? res.render('home') : res.render('error')
-});
+  var hours = d.getHours();
+
+  if (day === 0 || day === 6) {
+    res.render('error')
+  } else if (hours> 8 && hours < 17) {
+    next();
+  } else {
+    res.render('error') 
+  }}
+  ,  function (req, res, next) 
+  {  res.render('home')}
+);
 module.exports = router;

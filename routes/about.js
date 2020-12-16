@@ -4,12 +4,19 @@ var router = express.Router();
 /* GET users listing. */
 router.get('/', function(req, res, next) {
     var d = new Date();
-    var days = [1,2,3,4,5]
     var day = d.getDay();
-    var acces = days.includes(day)
-    acces ? res.render('about') : res.render('error')
-
+    var hours = d.getHours();
+  
+    if (day === 0 || day === 6) {
+      res.render('error')
+    } else if (hours> 8 && hours < 17) {
+      next();
+    } else {
+      res.render('error') 
+    }}
+    ,  function (req, res, next) 
+    {  res.render('home')}
  
-});
+);
 
 module.exports = router;
